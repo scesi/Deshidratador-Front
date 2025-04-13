@@ -1,5 +1,3 @@
-import React from "react";
-
 const Card = ({
   title,
   value,
@@ -10,7 +8,7 @@ const Card = ({
   icon: string;
 }) => {
   return (
-    <div className="bg-white rounded-[10px] px-4 py-3 h-28">
+    <div className="bg-white rounded-[10px] px-4 py-3 h-32">
       <p className="text-blue-950 text-base font-bold">{title}</p>
       <div className="flex justify-center items-center h-16">
           <span className="text-2xl mr-3">

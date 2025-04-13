@@ -1,15 +1,23 @@
+import { BrowserRouter, Route, Routes } from "react-router";
 import "./App.css";
-import Sidebar from "./components/Sidebar/Sidebar";
 import HomePage from "./pages/HomePage/HomePage";
+import LayoutDashboard from "./pages/LayoutDashboard/LayoutDashboard";
+import ReportsPage from "./pages/ReportsPage/ReportsPage";
+import StatsPage from "./pages/StatsPage/StatsPage";
+import NotificationsPage from "./pages/NotificationsPage/NotificationsPage";
 
 function App() {
   return (
-    <main className="flex h-screen">
-      <Sidebar />
-      <main className="bg-[#C4D2E7] flex-1 px-10">
-      <HomePage/>
-      </main>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LayoutDashboard/>}>
+          <Route path="general" element={<HomePage/>}/>
+          <Route path="reportes" element={<ReportsPage/>}/>
+          <Route path="estadisticas" element={<StatsPage/>}/>
+          <Route path="notificaciones" element={<NotificationsPage/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
