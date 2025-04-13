@@ -1,25 +1,16 @@
-import { useState } from 'react'
-import './App.css'
+import "./App.css";
+import Sidebar from "./components/Sidebar/Sidebar";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button className='bg-amber-200 rounded-lg p-2 shadow-2xs hover:bg-amber-50' onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className="flex h-screen">
+      <Sidebar />
+      <main className="bg-[#C4D2E7] flex-1 px-10">
+      <HomePage/>
+      </main>
+    </main>
+  );
 }
 
-export default App
+export default App;
