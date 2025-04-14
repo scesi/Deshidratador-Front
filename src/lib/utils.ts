@@ -43,6 +43,7 @@ export const hasErrorInput = [
 export type ColorUtility = "bg" | "stroke" | "fill" | "text"
 
 export const chartColors = {
+  // Colores originales de Tremor (se mantienen)
   blue: {
     bg: "bg-blue-500",
     stroke: "stroke-blue-500",
@@ -55,53 +56,43 @@ export const chartColors = {
     fill: "fill-emerald-500",
     text: "text-emerald-500",
   },
-  violet: {
-    bg: "bg-violet-500",
-    stroke: "stroke-violet-500",
-    fill: "fill-violet-500",
-    text: "text-violet-500",
+
+  // TUS COLORES PERSONALIZADOS (agregados al final)
+  navy: {
+    bg: "bg-[#173555]",       // Usando notación hexadecimal
+    stroke: "stroke-[#173555]",
+    fill: "fill-[#173555]",
+    text: "text-[#173555]",
   },
-  amber: {
-    bg: "bg-amber-500",
-    stroke: "stroke-amber-500",
-    fill: "fill-amber-500",
-    text: "text-amber-500",
+  primary: {
+    bg: "bg-[#486F99]",
+    stroke: "stroke-[#486F99]",
+    fill: "fill-[#486F99]",
+    text: "text-[#486F99]",
   },
-  gray: {
-    bg: "bg-gray-500",
-    stroke: "stroke-gray-500",
-    fill: "fill-gray-500",
-    text: "text-gray-500",
+  accent: {
+    bg: "bg-[#57A4F6]",
+    stroke: "stroke-[#57A4F6]",
+    fill: "fill-[#57A4F6]",
+    text: "text-[#57A4F6]",
   },
-  cyan: {
-    bg: "bg-cyan-500",
-    stroke: "stroke-cyan-500",
-    fill: "fill-cyan-500",
-    text: "text-cyan-500",
+  darkgray: {
+    bg: "bg-[#3B4753]",
+    stroke: "stroke-[#3B4753]",
+    fill: "fill-[#3B4753]",
+    text: "text-[#3B4753]",
   },
-  pink: {
-    bg: "bg-pink-500",
-    stroke: "stroke-pink-500",
-    fill: "fill-pink-500",
-    text: "text-pink-500",
-  },
-  lime: {
-    bg: "bg-lime-500",
-    stroke: "stroke-lime-500",
-    fill: "fill-lime-500",
-    text: "text-lime-500",
-  },
-  fuchsia: {
-    bg: "bg-fuchsia-500",
-    stroke: "stroke-fuchsia-500",
-    fill: "fill-fuchsia-500",
-    text: "text-fuchsia-500",
+  lightblue: {
+    bg: "bg-[#A4BBD4]",
+    stroke: "stroke-[#A4BBD4]",
+    fill: "fill-[#A4BBD4]",
+    text: "text-[#A4BBD4]",
   },
 } as const satisfies {
   [color: string]: {
     [key in ColorUtility]: string
   }
-}
+};
 
 export type AvailableChartColorsKeys = keyof typeof chartColors
 
