@@ -8,7 +8,7 @@ const Sidebar = () => {
       <ul className="px-7">
         <li className=" font-bold">
           <NavLink
-            to={"/general"}
+            to={"/"}
             className={({ isActive }) =>
               isActive
                 ? "bg-[#C4D2E7] rounded-lg text-[#173555] py-2 px-4 inline-flex items-center w-full"

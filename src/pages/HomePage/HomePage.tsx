@@ -1,41 +1,10 @@
 import { LineChart } from "../../components/LineChart/LineChart";
 import { DonutChart } from "../../components/AreaChart/AreaChart";
 import Card from "../../components/Card/Card";
+import { useAppDispatch, useAppSelector } from "../../hooks/store";
+import { useEffect } from "react";
+import { getAllData } from "../../store/slices/sensorsData";
 
-const data = [
-  {
-    name: "SolarCells",
-    amount: 4890,
-  },
-  {
-    name: "Glass",
-    amount: 2103,
-  },
-  {
-    name: "JunctionBox",
-    amount: 2050,
-  },
-  {
-    name: "Adhesive",
-    amount: 1300,
-  },
-  {
-    name: "BackSheet",
-    amount: 1100,
-  },
-  {
-    name: "Frame",
-    amount: 700,
-  },
-  {
-    name: "Encapsulant",
-    amount: 200,
-  },
-  {
-    name: "otro",
-    amount: 200,
-  },
-];
 
 const chartdata = [
   {
@@ -100,6 +69,13 @@ const chartdata = [
   },
 ];
 const HomePage = () => {
+  const {data} = useAppSelector(state => state.sensorsData)
+  const dispatch = useAppDispatch()
+
+  console.log('store', data)
+  useEffect(() => {
+    dispatch(getAllData())
+  }, [])
   return (
     <section>
       <h1 className="text-xl font-bold text-[#173555] pt-8 pb-6">
@@ -114,26 +90,16 @@ const HomePage = () => {
         <div className="bg-white p-8 rounded-2xl flex justify-center">
           <LineChart
             className="h-80"
-            data={chartdata}
+            data={data}
             index="date"
-            categories={["SolarPanels", "Inverters"]}
+            categories={["temperature", "humidity"]}
             valueFormatter={(number: number) =>
-              `$${Intl.NumberFormat("us").format(number).toString()}`
+              `${Intl.NumberFormat("us").format(number).toString()}`
             }
             onValueChange={(v) => console.log(v)}
           />
         </div>
         <div className="bg-white p-8 rounded-2xl flex justify-center items-center">
-          <DonutChart
-            data={data}
-            variant="donut"
-            category="name"
-            value="amount"
-            colors={["navy", "primary", "accent", "darkgray", "lightblue"]}
-            valueFormatter={(number: number) =>
-              `$${Intl.NumberFormat("us").format(number).toString()}`
-            }
-          />
         </div>
       </div>
     </section>
