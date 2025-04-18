@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { sensorsData } from "../../../types/sensorsData";
+import { temperatureData } from "../../../types/sensorsData";
 
 type SensorsDataSliceState = {
-    data: Array<sensorsData>
+    data: Array<temperatureData>
     isLoading: boolean;
     success: boolean;
     message: string | null
@@ -15,11 +15,11 @@ const initialState: SensorsDataSliceState = {
     message: null
 }
 
-export const SensorsDataSlice = createSlice({
-    name: 'sensorsData',
-    initialState,
+export const TemperatureDataSlice = createSlice({
+    name: 'temperatureData',
+    initialState, 
     reducers: {
-        setData: (state, action: PayloadAction<sensorsData[]>) => {
+        setData: (state, action: PayloadAction<temperatureData[]>) => {
             state.data = action.payload
         },
         setIsLoading: (state, action : PayloadAction<boolean>) => {
@@ -31,6 +31,6 @@ export const SensorsDataSlice = createSlice({
     }
 })
 
-export const sensorsDataActions = SensorsDataSlice.actions
+export const temperatureDataActions = TemperatureDataSlice.actions
 
-export const sensorsDataReducer = SensorsDataSlice.reducer
+export const temperatureDataReducer = TemperatureDataSlice.reducer
