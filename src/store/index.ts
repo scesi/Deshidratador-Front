@@ -7,9 +7,7 @@ export const store = configureStore({
 		sensorsData: sensorsDataReducer,
 		temperatureData: temperatureDataReducer,
 	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-		serializableCheck: false,
-	  }),
+	
 });
 
 export type RootState = ReturnType<typeof store.getState>;

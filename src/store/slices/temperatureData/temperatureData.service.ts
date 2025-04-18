@@ -1,6 +1,6 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { temperatureDataActions } from "./temperatureData.slice";
-import { temperatureData } from "../../../types/sensorsData";
+import { temperatureData } from "../../../types/temperatureData";
 import { formatTime } from "../../../utils";
 import sensorData from '../../../assets/data/sensors.json';
 

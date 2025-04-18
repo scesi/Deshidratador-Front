@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { temperatureData } from "../../../types/sensorsData";
+import { temperatureData } from "../../../types/temperatureData";
 
 type SensorsDataSliceState = {
-    data: Array<temperatureData>
+    data: temperatureData[]
     isLoading: boolean;
     success: boolean;
     message: string | null
