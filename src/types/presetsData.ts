@@ -1,6 +1,6 @@
 export interface presetsData{
-    fruto: string
+    fruit: string
     temperature: number
     humidity: number
-    aire: number
+    air: number
 }

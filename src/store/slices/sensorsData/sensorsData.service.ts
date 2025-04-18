@@ -23,7 +23,7 @@ export const getAllData = () => async (dispatch: Dispatch) => {
     // llamada a ep
     dispatch(sensorsDataActions.setIsLoading(true));
 
-    const response = await api.get("/sensors");
+    const response = await api.get("http://192.168.20.3:3000/api/sensors");
     const backendData: BackendResponse = response.data;
 
     const transformedData: sensorsData[] = backendData.data.map((item) => ({
