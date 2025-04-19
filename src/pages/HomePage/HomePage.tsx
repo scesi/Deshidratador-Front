@@ -1,4 +1,4 @@
-import { LineChart } from "../../components/LineChart/LineChart";
+//import { LineChart } from "../../components/LineChart/LineChart";
 import Card from "../../components/Card/Card";
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { useEffect } from "react";
@@ -24,7 +24,7 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-2 gap-5">
         <div className="bg-white p-8 rounded-2xl flex justify-center">
-          <LineChart
+         {/*<LineChart
             className="h-56"
             data={data}
             index="hour"
@@ -38,7 +38,7 @@ const HomePage = () => {
             showLegend={false}
             showTooltip={true}
             xAxisLabel="24H Temperature"
-          />
+          />*/}
         </div>
         <div className="bg-white p-8 rounded-2xl flex justify-center items-center"></div>
       </div>
