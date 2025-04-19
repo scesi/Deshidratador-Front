@@ -1,9 +1,10 @@
-import { LineChart } from "../../components/LineChart/LineChart";
+//import { LineChart } from "../../components/LineChart/LineChart";
 import Card from "../../components/Card/Card";
 import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { useEffect } from "react";
 import { getTemperatureData } from "../../store/slices/temperatureData/temperatureData.service";
 import FruitsTable from "../../components/FruitsTable/FruitsTable";
+import { LineChart } from "../../components/LineChart/LineChart";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +39,7 @@ const HomePage = () => {
       </div>
       <div className="grid grid-cols-2 gap-5">
         <div className="bg-white p-8 rounded-2xl flex justify-center">
-          <LineChart
+         <LineChart
             className="h-56"
             data={data || []}
             index="hour"
