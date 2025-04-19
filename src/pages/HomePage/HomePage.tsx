@@ -6,22 +6,35 @@ import { getTemperatureData } from "../../store/slices/temperatureData/temperatu
 import FruitsTable from "../../components/FruitsTable/FruitsTable";
 
 const HomePage = () => {
-  const { data } = useAppSelector((state) => state.temperatureData);
   const dispatch = useAppDispatch();
+  const { data } = useAppSelector((state) => state.temperatureData);
+  const { temperature, humidity, air } = useAppSelector((state) => state.sensorsData);
 
-  console.log("store", data);
   useEffect(() => {
     dispatch(getTemperatureData());
   }, []);
+
   return (
     <section>
       <h1 className="text-xl font-bold text-[#173555] pt-8 pb-6">
         Información General
       </h1>
       <div className="grid grid-cols-3 gap-5 pb-6">
-        <Card title="Temperatura" value="25 °C" icon="./temperatureIcon.svg" />
-        <Card title="Humedad" value="25 %" icon="./humidityIcon.svg" />
-        <Card title="Aire" value="25 °C" icon="./airIcon.svg" />
+        <Card
+          title="Temperatura"
+          value={`${temperature} °C`}
+          icon="./temperatureIcon.svg"
+        />
+        <Card
+          title="Humedad"
+          value={`${humidity} %`}
+          icon="./humidityIcon.svg"
+        />
+        <Card
+          title="Aire"
+          value={`${air} %`}
+          icon="./airIcon.svg"
+        />
       </div>
       <div className="grid grid-cols-2 gap-5">
         <div className="bg-white p-8 rounded-2xl flex justify-center">

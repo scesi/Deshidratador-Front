@@ -30,7 +30,6 @@ export const getTemperatureData = () => async (dispatch: Dispatch) => {
       temperature: item.temperature,
     }));
 
-    console.log("transformedData", transformedData);
     dispatch(temperatureDataActions.setData(transformedData));
   } catch (error) {
     console.error("Error fetching sensor data:", error);

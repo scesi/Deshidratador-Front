@@ -1,4 +1,8 @@
 import { useState } from "react";
+
+import { useAppDispatch } from "../../hooks/store";
+import { sendConfigPresetFruitData } from "../../store/slices/sensorsData";
+
 import { presetsData } from "../../types/presetsData";
 
 const fruitsData = [{
@@ -22,10 +26,12 @@ const fruitsData = [{
   ]
 
 const FruitsTable = () => {
-    const [selectedFruit, setSelectedFruit] = useState<presetsData | null>(null);
+  const [selectedFruit, setSelectedFruit] = useState<presetsData | null>(null);
 
+  const dispatch = useAppDispatch();
 
   const handleSelectFruit = (fruit: presetsData) => {
+    dispatch(sendConfigPresetFruitData(fruit));
     setSelectedFruit(fruit);
   };
     return (
