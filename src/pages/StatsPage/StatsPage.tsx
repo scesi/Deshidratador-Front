@@ -7,7 +7,6 @@ const StatsPage = () => {
   const { data } = useAppSelector((state) => state.sensorsData);
   const dispatch = useAppDispatch();
 
-  console.log("store", data);
   useEffect(() => {
     dispatch(getAllData());
   }, []);

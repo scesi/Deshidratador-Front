@@ -4,7 +4,4 @@ export interface sensorsData {
   date: string;
 }
 
-export interface temperatureData {
-  temperature: number;
-  hour: string;
-}
+
