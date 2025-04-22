@@ -6,7 +6,7 @@ type IconProps = {
   className?: string;
 } & React.SVGProps<SVGSVGElement>;
 
-const Icon: React.FC<IconProps> = ({ name, className = "", ...props }) => {
+const Icon: React.FC<IconProps> = ({ name }) => {
   const icons = {
     home: (
       <svg

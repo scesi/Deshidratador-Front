@@ -1,5 +1,3 @@
-//import React from 'react'
-
 const NotificationsPage = () => {
   const data = [
     { fecha: '17/04/2025 10:00', tipo: 'Alerta', descripcion: 'Temperatura supera 40°C%', estado: 'Pendiente' },
