@@ -1,11 +1,24 @@
 import html2pdf from 'html2pdf.js';
+import api from '../../api/axios';
+import { useEffect, useState } from 'react';
+
+interface SensorData {
+  id: number;
+  temperature: number;
+  humidity: number;
+  uvIndex: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ApiResponse {
+  data: SensorData[];
+  message: string;
+  ok: boolean;
+}
 
 const ReportsPage = () => {
-  const data = [
-    { fecha: '17/04/2025 10:00', temperatura: '34.5 °C', humedad: '40%', uv: '5', sensor: 'ESP-01' },
-    { fecha: '17/04/2025 15:25', temperatura: '40 °C', humedad: '32%', uv: '4', sensor: 'ESP-01' },
-    { fecha: '17/04/2025 20:36', temperatura: '26.8 °C', humedad: '25%', uv: '6', sensor: 'ESP-01' },
-  ];
+  const [dataReports, setDataReports] = useState<SensorData[]>([]);
 
   const handleDownloadPDF = () => {
     const element = document.getElementById('table-pdf');
@@ -20,6 +33,31 @@ const ReportsPage = () => {
     };
 
     html2pdf().set(opt).from(element).save();
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await api.get<ApiResponse>("/sensors");
+      setDataReports(response.data.data);
+    } catch (error) {
+      console.error("Error fetching data reports", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  // Función para formatear la fecha
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    return date.toLocaleString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
   };
 
   return (
@@ -42,17 +80,27 @@ const ReportsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((row, index) => {
-                const isLast = index === data.length - 1;
+              {dataReports.map((row) => {
+                const isLast = row.id === dataReports[dataReports.length - 1]?.id;
                 const borderBottom = isLast ? '' : 'border-b';
 
                 return (
-                  <tr key={index} className="hover:bg-gray-50 text-center">
-                    <td className={`py-2 px-4 border-r border-[#173555] ${borderBottom}`}>{row.fecha}</td>
-                    <td className={`py-2 px-4 border-r border-[#173555] ${borderBottom}`}>{row.temperatura}</td>
-                    <td className={`py-2 px-4 border-r border-[#173555] ${borderBottom}`}>{row.humedad}</td>
-                    <td className={`py-2 px-4 border-r border-[#173555] ${borderBottom}`}>{row.uv}</td>
-                    <td className={`py-2 px-4 border-[#173555] ${borderBottom}`}>{row.sensor}</td>
+                  <tr key={row.id} className="hover:bg-gray-50 text-center">
+                    <td className={`py-2 px-4 border-r border-[#173555] ${borderBottom}`}>
+                      {formatDate(row.createdAt)}
+                    </td>
+                    <td className={`py-2 px-4 border-r border-[#173555] ${borderBottom}`}>
+                      {row.temperature.toFixed(2)}
+                    </td>
+                    <td className={`py-2 px-4 border-r border-[#173555] ${borderBottom}`}>
+                      {row.humidity.toFixed(2)}
+                    </td>
+                    <td className={`py-2 px-4 border-r border-[#173555] ${borderBottom}`}>
+                      {row.uvIndex}
+                    </td>
+                    <td className={`py-2 px-4 border-[#173555] ${borderBottom}`}>
+                      {`Sensor-${row.id}`}
+                    </td>
                   </tr>
                 );
               })}
