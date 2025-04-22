@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { sensorsDataActions } from "./sensorsData.slice";
 import { sensorsData } from "../../../types/sensorsData";
-import { formatDate } from "../../../utils";
+import { formatDate, formatToYYYYMMDD } from "../../../utils";
 import api from "../../../api/axios";
 import { presetsData } from "../../../types/presetsData";
 
@@ -24,7 +24,18 @@ export const getAllData = () => async (dispatch: Dispatch) => {
     dispatch(sensorsDataActions.clean());
     dispatch(sensorsDataActions.setIsLoading(true));
 
-    const response = await api.get("http://192.168.20.3:3000/api/sensors");
+    // Obtener fecha actual y fecha de hace 7 días
+    const now = new Date();
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(now.getDate() - 7);
+
+    const toDate = formatToYYYYMMDD(now);
+    const fromDate = formatToYYYYMMDD(sevenDaysAgo);
+
+    const response = await api.post("/sensors/average", {
+      from: fromDate,
+      to: toDate
+    });
     const backendData: BackendResponse<BackendSensorData[]> = response.data;
 
     const transformedData: sensorsData[] = backendData.data.map((item) => ({
