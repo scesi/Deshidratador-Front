@@ -99,14 +99,18 @@ const ScrollButton = ({ icon, onClick, disabled }: ScrollButtonProps) => {
       intervalRef.current = setInterval(() => {
         onClick?.()
       }, 300)
-    } else {
+    } else if (intervalRef.current) {
       clearInterval(intervalRef.current)
     }
-    return () => clearInterval(intervalRef.current)
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
   }, [isPressed, onClick])
 
   React.useEffect(() => {
-    if (disabled) {
+    if (disabled && intervalRef.current) {
       clearInterval(intervalRef.current)
       setIsPressed(false)
     }
@@ -217,10 +221,9 @@ const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, ref) => {
       intervalRef.current = setInterval(() => {
         keyDownHandler(isKeyDowned)
       }, 300)
-    } else {
+    } else if (intervalRef.current) {
       clearInterval(intervalRef.current)
     }
-    return () => clearInterval(intervalRef.current)
   }, [isKeyDowned, scrollToTest])
 
   const keyDown = (e: KeyboardEvent) => {
