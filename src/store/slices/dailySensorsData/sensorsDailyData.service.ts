@@ -1,7 +1,7 @@
 import { Dispatch } from "@reduxjs/toolkit";
 import { temperatureData } from "../../../types/temperatureData";
 import { formatTime } from "../../../utils";
-import sensorData from "../../../assets/data/sensors.json";
+// import sensorData from "../../../assets/data/sensors.json";
 import { sensorsDailyDataActions } from "./sensorsDailyData.slice";
 import api from "../../../api/axios";
 import { HumidityData } from "../../../types/humidityData";

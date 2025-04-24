@@ -32,8 +32,10 @@ const FruitsTable = () => {
 
   const handleSelectFruit = (fruit: presetsData) => {
     dispatch(sendConfigPresetFruitData(fruit));
+    
     setSelectedFruit(fruit);
   };
+
     return (
         <div className="space-y-4">
           {/* Tabla de frutas */}
