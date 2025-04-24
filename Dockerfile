@@ -15,7 +15,8 @@ RUN npm install
 # Copiar el resto del código fuente
 COPY . .
 
-# Construir la aplicación
+# Construir la aplicación con más memoria asignada
+ENV NODE_OPTIONS="--max-old-space-size=512"
 RUN npm run build
 
 # Etapa de producción
