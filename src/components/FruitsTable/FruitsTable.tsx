@@ -30,8 +30,8 @@ const FruitsTable = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleSelectFruit = (fruit: presetsData) => {
-    dispatch(sendConfigPresetFruitData(fruit));
+  const handleSelectFruit = async (fruit: presetsData) => {
+    await dispatch(sendConfigPresetFruitData(fruit));
     
     setSelectedFruit(fruit);
   };

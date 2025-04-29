@@ -1,3 +1,6 @@
+// 17/04/2025 10:00
+type DateFormat = 'DD/MM/YYYY HH:mm' | 'DD/MM/YYYY' | 'HH:mm' | 'DD/MM/YYYY HH:mm:ss';
+
 // Función para formatear la fecha
 export const formatDate = (dateString: string): string => {
   const date = new Date(dateString);
@@ -25,3 +28,9 @@ export const formatToYYYYMMDD = (date: Date) => {
 
   return `${year}-${month}-${day}`;
 };
+
+import moment from "moment";
+
+export const formatDateMoment = (date: Date, format: DateFormat = 'DD/MM/YYYY HH:mm') => {
+  return moment(date).format(format);
+}
