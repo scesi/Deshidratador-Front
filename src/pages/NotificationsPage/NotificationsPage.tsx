@@ -1,8 +1,30 @@
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks/store";
+import { getNotificationsService } from "../../store/slices/notifications/notification.service";
+import { formatDateMoment } from "../../utils";
+import { INotification } from "../../types/notification.type";
+
 const NotificationsPage = () => {
-  const data = [
-    { fecha: '17/04/2025 10:00', tipo: 'Alerta', descripcion: 'Temperatura supera 40°C%', estado: 'Pendiente' },
-    { fecha: '17/04/2025 10:10', tipo: 'Informacion', descripcion: 'Datos recibidos correctamente', estado: 'Atendido' },
-  ];
+
+  const dispatch = useAppDispatch();
+
+  const { notifications, loading, error } = useAppSelector((state) => state.notifications);
+
+  // const loadNotifications = useCallback(() => {
+  //   console.log('cargando notificaciones')
+  // }, [dispatch]);
+  
+  useEffect(() => {
+    console.log('cargando notificaciones')
+    dispatch(getNotificationsService());
+    // loadNotifications();
+  }, [dispatch]);
+
+  const handleOnClickNotification = (notification: INotification) => {
+    console.log('notification', notification);
+    // dispatch(notificationActions.setNotificationSelected(notification));
+  }
+  
 
   return (
     <div>
@@ -19,7 +41,7 @@ const NotificationsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((row, index) => {
+              {/* {data.map((row, index) => {
                 const isLast = index === data.length - 1;
                 const borderBottom = isLast ? '' : 'border-b';
 
@@ -31,7 +53,46 @@ const NotificationsPage = () => {
                     <td className={`py-2 px-4 border-[#173555] text-center ${borderBottom}`}>{row.estado}</td>
                   </tr>
                 );
-              })}
+              })} */}
+              {
+                loading && (
+                  <tr>
+                    <td colSpan={4} className="text-center">Cargando notificaciones...</td>
+                  </tr>
+                )
+              }
+              {
+                error && (
+                  <tr>
+                    <td colSpan={4} className="text-center">Error al cargar notificaciones</td>
+                  </tr>
+                )
+              }
+
+              {
+                notifications.length === 0 && !loading && !error && (
+                  <tr>
+                    <td colSpan={4} className="text-center">No hay notificaciones</td>
+                  </tr>
+                )
+              }
+              {
+                notifications.map((notification) => {
+                  // const isLast =
+                  return (
+                    <tr
+                      key={notification.id}
+                      onClick={() => handleOnClickNotification(notification)}
+                      className="hover:bg-gray-50 cursor-pointer"
+                    >
+                      <td>{formatDateMoment(new Date(notification.createdAt))}</td>
+                      <td>{notification.type}</td>
+                      <td>{notification.detail}</td>
+                      <td>{notification.state}</td>
+                    </tr>
+                  )
+                })
+              }
             </tbody>
           </table>
         </div>
