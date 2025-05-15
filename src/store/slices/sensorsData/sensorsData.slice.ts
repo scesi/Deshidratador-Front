@@ -20,9 +20,9 @@ export interface SendSensorDataType {
 
 const initialState: SensorsDataSliceState = {
     data: [],
-    temperature: 11,
-    humidity: 11,
-    air: 11,
+    temperature: 0,
+    humidity: 0,
+    air: 0,
     isLoading:false,
     success: true,
     message: null,

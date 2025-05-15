@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/store";
 import { useEffect } from "react";
 import { getHumidityData, getTemperatureData } from "../../store/slices/dailySensorsData/sensorsDailyData.service";
 import FruitsTable from "../../components/FruitsTable/FruitsTable";
+import { numberParser } from "../../utils/number.util";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -27,12 +28,12 @@ const HomePage = () => {
       <div className="grid grid-cols-3 gap-5 pb-6">
         <Card
           title="Temperatura"
-          value={`${temperature} °C`}
+          value={`${numberParser(temperature)} °C`}
           icon="./temperatureIcon.svg"
         />
         <Card
           title="Humedad"
-          value={`${humidity} %`}
+          value={`${numberParser(humidity)} %`}
           icon="./humidityIcon.svg"
         />
         <Card title="Aire" value={`${air} %`} icon="./airIcon.svg" />
