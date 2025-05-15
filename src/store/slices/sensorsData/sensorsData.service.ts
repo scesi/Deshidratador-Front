@@ -12,6 +12,7 @@ interface BackendSensorData {
   id: number;
   temperature: number;
   humidity: number;
+  air: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -104,6 +105,37 @@ export const sendConfigPresetFruitData = (preset: presetsData) => async (dispatc
   } catch (error) {
     console.error("Error sending config preset fruit data:", error);
     dispatch(sensorsDataActions.setMessage("Failed to send config preset fruit data"));
+  } finally {
+    dispatch(sensorsDataActions.setIsLoading(false));
+  }
+}
+
+export const getLastSensorData = () => async (dispatch: Dispatch) => {
+  try {
+    dispatch(sensorsDataActions.clean());
+    dispatch(sensorsDataActions.setIsLoading(true));
+
+    const response = await api.post("/sensors/last");
+
+    const backendData: BackendResponse<BackendSensorData> = response.data;
+
+    if (backendData.ok) {
+      dispatch(sensorsDataActions.setCurrentData({
+        temperature: backendData.data.temperature,
+        humidity: backendData.data.humidity,
+        air: backendData.data.air,
+      }))
+    } else {
+      dispatch(sensorsDataActions.setMessage("Failed to load last sensor data"));
+      dispatch(sensorsDataActions.setCurrentData({
+        temperature: 0,
+        humidity: 0,
+        air: 0,
+      }))
+    }
+  } catch (error) {
+    console.error("Error fetching last sensor data:", error);
+    dispatch(sensorsDataActions.setMessage("Failed to load last sensor data"));
   } finally {
     dispatch(sensorsDataActions.setIsLoading(false));
   }
